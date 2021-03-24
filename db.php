@@ -35,7 +35,7 @@ class db
         $this->tbl = $tbl;
     }
 
-    function select_data($name='*'){
+    public function selectData($name='*'){
         if(is_array($name)){
             $names = implode(",",$name);
         }else{
@@ -44,10 +44,10 @@ class db
         $sql = $this->pdh->prepare("SELECT {$names} FROM {$this->tbl}");
         $sql->execute();
         $row=$sql->fetchAll(PDO::FETCH_OBJ);
-        var_dump($row);
+        //var_dump($row);
     }
 
-    function insert_data($field,$data){
+    public function insertData($field,$data){
         if(is_array($data)){
             $names = "'".implode("','",$data)."'";
             $field = implode(",",$field);
@@ -58,9 +58,39 @@ class db
         }
 
     }
+
+    public function editData($field,$data,$id){
+        foreach ($field as $key=>$val){
+            $txt[]=$val."='".$data[$key]."'";
+
+        }
+
+        $query=implode(',',$txt);
+        $sql = $this->pdh->prepare("UPDATE $this->tbl SET $query WHERE id=$id");
+        $sql->execute();
+
+    }
+
+    public function deleteData($id){
+        $sql = $this->pdh->prepare("DELETE FROM {$this->tbl} WHERE id=$id");
+        $sql->execute();
+    }
+
+    public function searchData($name,$value){
+        $sql = $this->pdh->prepare("SELECT * FROM {$this->tbl} WHERE $name=$value");
+        $sql->execute();
+        $row=$sql->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public function likeData($name,$value){
+        $sql = $this->pdh->prepare("SELECT * FROM {$this->tbl} WHERE $name LIKE $value");
+        $sql->execute();
+        $row=$sql->fetchAll(PDO::FETCH_OBJ);
+    }
 }
 
 $obj = new db();
 $obj->setTbl("user_tbl");
-$obj->select_data();
+//$obj->selectData();
 //$obj->insert_data(['name','email','password','lastname'],['ebi','ebi@gmail.com','123','rezaie']);
+//$obj->editData(['name','email','password','lastname'],['reza','ehhhh@gmail.com','123','rezaiee'],2);
