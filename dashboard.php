@@ -1,15 +1,16 @@
 ﻿<?php
 session_start();
-    if(!isset($_SESSION['name'])){
+    if(!isset($_SESSION['user'])){
         header("location:index.php?login=first");
     }
     if(isset($_GET['logout'])){
         if($_GET['logout']=='ok'){
-            include_once 'app/users.php';
-            $obj=new user();
+            include_once './app/users.php';
+            $obj= new user();
             $obj->logout();
         }
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -278,7 +279,7 @@ session_start();
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                             <img alt="" src="img/avatar1_small.jpg">
                             <span class="username">
-                                <?php echo $_SESSION['name']; ?>
+                                <?php echo $_SESSION['user']; ?>
                             </span>
                             <b class="caret"></b>
                         </a>
@@ -287,7 +288,7 @@ session_start();
                             <li><a href="#"><i class=" icon-suitcase"></i>پروفایل</a></li>
                             <li><a href="#"><i class="icon-cog"></i>تنظیمات</a></li>
                             <li><a href="#"><i class="icon-bell-alt"></i>اعلام ها</a></li>
-                            <li><a href="dashbord.php?logout=ok" name="logout"><i class="icon-key"></i>خروج</a></li>
+                            <li><a href="dashboard.php?logout=ok" name="logout"><i class="icon-key"></i>خروج</a></li>
                         </ul>
                     </li>
                     <!-- user login dropdown end -->
@@ -303,7 +304,7 @@ session_start();
 				<br/><br/>
                 <ul class="sidebar-menu">
                     <li class="active">
-                        <a class="" href="dashbord.php?m=index&p=index">
+                        <a class="" href="dashboard.php?m=index&p=index">
                             <i class="icon-dashboard"></i>
                             <span>صفحه اصلی</span>
                         </a>
@@ -315,9 +316,9 @@ session_start();
                             <span class="arrow"></span>
                         </a>
                         <ul class="sub">
-                            <li><a class="" href="dashbord.php?contact=list">لیست</a></li>
-                            <li><a class="" href="dashbord.php?contact=add">افزودن</a></li>
-                            <li><a class="" href="dashbord.php?contact=search">جستجو</a></li>
+                            <li><a class="" href="dashboard.php?contact=list">لیست</a></li>
+                            <li><a class="" href="dashboard.php?contact=add">افزودن</a></li>
+                            <li><a class="" href="dashboard.php?contact=search">جستجو</a></li>
                         </ul>
                     </li>
                     
@@ -334,27 +335,7 @@ session_start();
         <section id="main-content">
             <section class="wrapper">
                 <?php
-                    if(isset($_GET['contact'])){
-                       if($_GET['contact']=='add'){
-                        include_once 'contact/add.php';
-                       }
-                        elseif($_GET['contact']=='list'){
-                            include_once 'contact/list.php';
-                        }
-                       elseif($_GET['contact']=='delete') {
-                           $id = $_GET['id'];
-                           include_once 'app/contact.php';
-                           $obj1 = new contact();
-                           $obj1->setTbl('contact_tbl');
-                           $obj1->deleteData($id);
-                       }
-                       elseif($_GET['contact']=='search'){
-                           include_once 'contact/search.php';
-                       }
-                       elseif($_GET['contact']=='edit'){
-                           include_once 'contact/edit.php';
-                       }
-                    }
+
 
                 ?>
             </section>

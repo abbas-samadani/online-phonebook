@@ -1,11 +1,11 @@
 ﻿<?php
-    include_once 'app/users.php';
-    session_start();
+include_once './app/users.php';
     if(isset($_POST['btn'])){
         $data=$_POST['frm'];
         $obj=new user();
         $obj->login($data);
     }
+
 ?>
 
 <!DOCTYPE html>
