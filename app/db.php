@@ -44,6 +44,7 @@ class db
         $sql = $this->pdh->prepare("SELECT {$names} FROM {$this->tbl}");
         $sql->execute();
         $row=$sql->fetchAll(PDO::FETCH_OBJ);
+        return $row;
         //var_dump($row);
     }
 
@@ -52,7 +53,7 @@ class db
             $names = "'".implode("','",$data)."'";
             $field = implode(",",$field);
             $sql = $this->pdh->prepare("INSERT INTO {$this->tbl}($field) VALUES ($names)");
-            //var_dump($sql);
+            //var_dump($sql);die;
             $sql->execute();
 
         }
@@ -74,6 +75,7 @@ class db
     public function deleteData($id){
         $sql = $this->pdh->prepare("DELETE FROM {$this->tbl} WHERE id=$id");
         $sql->execute();
+
     }
 
     public function searchData($name,$value){

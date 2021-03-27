@@ -1,10 +1,12 @@
 <?php
     include_once 'app/contact.php';
-    $obj1=new contact();
+    $obj = new Contact();
     if(isset($_POST['btnA'])){
-        $data=$_POST['frm'];
-        $obj1->add_contact($data);
+        $data = $_POST['frm'];
+        $obj->addContact($data);
     }
+
+
 ?>
 
 <h1 class="pageLables">افزودن شماره تماس جدید</h1>

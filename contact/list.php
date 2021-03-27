@@ -20,7 +20,7 @@
                         include_once 'app/contact.php';
                         $obj=new contact();
                         $obj->setTbl('contact_tbl');
-                        $result=$obj->list_contact();
+                        $result=$obj->listContact();
                         foreach ($result as $value):
                     ?>
 
@@ -29,8 +29,8 @@
                         <td><?php echo $value->lastname ?></td>
                         <td><?php echo $value->tel ?></td>
                         <td><?php echo $value->addr ?></td>
-                        <td><a href="dashbord.php?contact=edit&id=<?php echo $value->id ?>" class="btn btn-primary btn-xs"><i class="icon-pencil"></i></a></td>
-                        <td><a href="dashbord.php?contact=delete&id=<?php echo $value->id ?>" class="btn btn-danger btn-xs"><i class="icon-trash "></i></a></td>
+                        <td><a href="dashboard.php?contact=edit&id=<?php echo $value->id ?>" class="btn btn-primary btn-xs"><i class="icon-pencil"></i></a></td>
+                        <td><a href="dashboard.php?contact=delete&id=<?php echo $value->id ?>" class="btn btn-danger btn-xs"><i class="icon-trash "></i></a></td>
                     </tr>
                     <?php endforeach; ?>
                     </tbody>

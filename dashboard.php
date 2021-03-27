@@ -1,4 +1,5 @@
 ﻿<?php
+ob_start();
 session_start();
     if(!isset($_SESSION['user'])){
         header("location:index.php?login=first");
@@ -335,6 +336,24 @@ session_start();
         <section id="main-content">
             <section class="wrapper">
                 <?php
+                    if(isset($_GET['contact'])){
+                        if($_GET['contact']=='add'){
+                            include_once './contact/add.php';
+                        }
+                        elseif($_GET['contact']=='list'){
+                            //echo 'hi';die;
+                            include_once './contact/list.php';
+                        }
+                        elseif($_GET['contact']=='delete'){
+
+                            //echo 'hi';die;
+                            $id=$_GET['id'];
+                            include_once './app/contact.php';
+                            $obj1=new Contact();
+                            $obj1->deleteContact($id);
+                            header('location:dashboard.php?contact=list');
+                        }
+                    }
 
 
                 ?>
